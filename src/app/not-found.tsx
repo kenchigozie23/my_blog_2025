@@ -1,120 +1,107 @@
-// pages/404.jsx
-import { motion } from 'framer-motion'
-import Link from 'next/link'
+import { motion } from "motion";
+import Link from "next/link";
 
-export default function NotFound() {
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 100
-      }
-    }
-  }
-
-  const numberVariants = {
-    hidden: { scale: 0, rotate: -180 },
-    visible: {
-      scale: 1,
-      rotate: 0,
-      transition: {
-        type: 'spring',
-        bounce: 0.4,
-        duration: 0.8
-      }
-    }
-  }
-
+export default function Custom404() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-4">
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="max-w-2xl w-full text-center text-white"
-      >
-        {/* 404 Number Animation */}
+    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-black flex items-center justify-center p-6 overflow-hidden">
+      {/* Background animated particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute bg-white rounded-full opacity-10"
+            initial={{
+              x: Math.random() * 100 + "vw",
+              y: Math.random() * 100 + "vh",
+              scale: Math.random() * 0.5 + 0.5,
+            }}
+            animate={{
+              y: ["0vh", "-100vh"],
+              opacity: [0.1, 0.3, 0],
+            }}
+            transition={{
+              duration: Math.random() * 10 + 5,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+            style={{
+              width: Math.random() * 20 + 10 + "px",
+              height: Math.random() * 20 + 10 + "px",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Main Content */}
+      <div className="relative z-10 text-center text-white">
+        {/* 404 Text */}
         <motion.h1
-          variants={numberVariants}
-          className="text-9xl font-bold tracking-tight mb-8 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-pink-500"
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-9xl md:text-[12rem] font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-pink-500"
         >
           404
         </motion.h1>
 
-        {/* Main Message */}
-        <motion.h2
-          variants={itemVariants}
-          className="text-4xl md:text-5xl font-semibold mb-6"
+        {/* Subtitle */}
+        <motion.p
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+          className="text-2xl md:text-4xl font-light mt-4"
         >
           Oops! Page Not Found
-        </motion.h2>
+        </motion.p>
 
         {/* Description */}
         <motion.p
-          variants={itemVariants}
-          className="text-lg md:text-xl text-gray-200 mb-8 max-w-lg mx-auto"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.5, ease: "easeOut" }}
+          className="text-lg md:text-xl text-gray-300 mt-2 max-w-md mx-auto"
         >
-          It seems you've ventured into the unknown. The page you're looking for doesn't exist or has been moved.
+          It seems you’ve wandered into the void. Let’s get you back to reality!
         </motion.p>
 
-        {/* Back Home Button */}
-        <motion.div variants={itemVariants}>
+        {/* Back to Home Button */}
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.8, ease: "easeOut" }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="mt-8"
+        >
           <Link href="/">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full text-white font-medium text-lg shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-purple-500/40 transition-all duration-300"
-            >
+            <a className="inline-block px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300">
               Return Home
-            </motion.button>
+            </a>
           </Link>
         </motion.div>
 
-        {/* Floating Particles */}
+        {/* Animated Orbiting Elements */}
         <motion.div
-          className="absolute inset-0 pointer-events-none"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.2 }}
-          transition={{ delay: 0.5, duration: 1 }}
-        >
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute bg-white rounded-full"
-              style={{
-                width: Math.random() * 4 + 2 + 'px',
-                height: Math.random() * 4 + 2 + 'px',
-                top: Math.random() * 100 + '%',
-                left: Math.random() * 100 + '%',
-              }}
-              animate={{
-                y: [0, -50, 0],
-                opacity: [0, 1, 0],
-              }}
-              transition={{
-                duration: Math.random() * 3 + 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          ))}
-        </motion.div>
-      </motion.div>
+          className="absolute -top-20 -left-20 w-40 h-40 border-2 border-dashed border-cyan-400 rounded-full"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div
+          className="absolute -bottom-24 -right-24 w-32 h-32 border-2 border-dashed border-pink-400 rounded-full"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        />
+      </div>
+
+      {/* Footer Credit */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.2 }}
+        className="absolute bottom-4 text-gray-400 text-sm"
+      >
+        Designed with ❤️ by xAI
+      </motion.p>
     </div>
-  )
+  );
 }
