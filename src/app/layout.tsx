@@ -3,7 +3,7 @@ import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
-  title: "Admin | My Blog",
+  title: "Awesome blog | Explore the horizon",
   description:
     "Stay informed with product updates, company news, and insights on how to sell smarter at your company.",
 };
